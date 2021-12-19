@@ -1,0 +1,57 @@
+class LinkedList
+	{
+		Node first = null;
+		public Object First
+		{
+			get { return first?.Data; }
+		}
+		public void AddFirst(Object data)
+		{
+			first = new Node(data, first);
+		}
+		public Object RemoveFirst()
+		{
+			Node oldNode = first;
+			if (oldNode == null)
+				return null;
+			first = oldNode.Next;
+			return oldNode.Data;
+		}
+		public void AddLast(Object data)
+		{
+			Node newNode = new Node(data, null);
+			Node tmp = FindLast();
+			if(tmp == null)
+            {
+				first = newNode;
+            }
+			else
+            {
+				tmp.Next = newNode;
+            }
+			
+		}
+		private Node FindLast()
+        {
+			if(first == null)
+            {
+				return null;
+            }
+			Node tmp = first;
+			while(tmp.Next != null)
+            {
+				tmp = tmp.Next;
+            }
+			return tmp;
+        }
+		class Node
+		{
+			public Object Data;
+			public Node Next;
+			public Node(Object data, Node next)
+			{
+				Data = data;
+				Next = next;
+			}
+		}
+	}

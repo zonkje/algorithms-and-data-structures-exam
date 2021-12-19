@@ -1,0 +1,43 @@
+public bool checkBlocksClosing(string text)
+        {
+            Stack<string> stack = new Stack<string>();
+            Dictionary<char, string> dictionary = new Dictionary<char, string>
+            {
+                {'"', "double quotation mark"},
+                {'\u0027', "signe quotation mark"},
+                {'|', "pipe"}
+            };
+            
+            foreach (char c in text)
+            {
+                if (stack.Count == 0)
+                {
+                    stack.Push(dictionary[c]);
+                }
+                else
+                {
+                    if (stack.Peek() == dictionary[c])
+                    {
+                        stack.Pop();
+                    }
+                    else
+                    {
+                        stack.Push(dictionary[c]);
+                    }
+                }
+            }
+            if (stack.Count == 0)
+            {
+                Console.WriteLine("All blocks are closed");
+                return true;
+            }
+            else
+            {
+                Console.WriteLine("You have unclosed blocks: ");
+                foreach(string s in stack)
+                {
+                    Console.WriteLine(s);
+                }
+                return false;
+            }
+        }
